@@ -1,8 +1,9 @@
 fastapi
 uvicorn
 openai
-pinecone-client
+pinecone
 pdfplumber
 langchain
 python-dotenv
 tiktoken
+pdfkit

@@ -5,6 +5,7 @@ from rag.generate_section import generate_section
 from rag.dynamic_query import generate_dynamic_query
 from template import generate_section_html, generate_pdf_file
 from template import section_html_templates
+from pydantic import BaseModel
 
 
 app = FastAPI(title="Florida Arbitration Complaint Assistant")
@@ -27,8 +28,12 @@ def generate_arbitration_section(section_name: str, user_facts: str, previous_se
     html_response = generate_section_html(section_name, output, previous_sections)
     return output, html_response
 
+class UserFactsInput(BaseModel):
+    user_facts: str
+
 @app.post("/generate-rag-case/")
-def generate_rag_case(user_facts: str):  
+def generate_rag_case(data: UserFactsInput):
+    user_facts = data.user_facts  
     section_generated = []
     html_sections = []
 
