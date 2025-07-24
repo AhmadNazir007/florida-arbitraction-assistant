@@ -5,11 +5,13 @@ import requests
 st.set_page_config(page_title="AAA Complaint Generator", layout="wide")
 st.title("📝 Florida Arbitration Complaint Generator")
 
+Api_live= "https://florida-arbitraction-assistant.onrender.com"
+Api_local= "http://localhost:8000"
 user_facts = st.text_area("Enter factual background", height=300)
 
 if st.button("Generate Complaint"):
     with st.spinner("Generating complaint..."):
-        response = requests.post("http://localhost:8000/generate-rag-case/", json={"user_facts": user_facts})
+        response = requests.post(f"{Api_live}/generate-rag-case/", json={"user_facts": user_facts})
         if response.status_code == 200:
             result = response.json()
             st.success("✅ Complaint generated!")
