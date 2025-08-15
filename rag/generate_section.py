@@ -7,7 +7,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_section(prompt):
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4.1-nano",
         messages=[
             {"role": "system", "content": "You are a legal assistant for arbitration complaint drafting."},
             {"role": "user", "content": prompt}
