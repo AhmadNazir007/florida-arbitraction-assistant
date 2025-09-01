@@ -4,12 +4,15 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime
 from fpdf import FPDF
+from weasyprint import HTML
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-path_to_wkhtmltopdf = r'wkhtmltopdf.exe'
+# path_to_wkhtmltopdf = r'wkhtmltopdf.exe'
 
-config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+# config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+
+
 
 html_template = """
 <!DOCTYPE html>
@@ -451,7 +454,8 @@ def generate_html(text):
   html_content = html_content.replace("\u2013", "-")
   html_content = html_content.replace("§", "\u00A7")
 
-  pdfkit.from_string(html_content, pdf_file_path, configuration=config)
+#   pdfkit.from_string(html_content, pdf_file_path, configuration=config)
+  HTML(string=html_content).write_pdf(pdf_file_path)
 
   print(f"PDF generated successfully as '{pdf_file_path}'")
 
