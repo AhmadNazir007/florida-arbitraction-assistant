@@ -6,6 +6,6 @@ pdfplumber
 langchain
 python-dotenv
 tiktoken
-pdfkit
 fpdf
 weasyprint
+streamlit

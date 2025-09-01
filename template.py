@@ -348,15 +348,16 @@ section_html_templates = {
 }
 
 from gpt_section_generator import llm
-import pdfkit
+# import pdfkit
 import os
 from datetime import datetime
-from fpdf import FPDF
+# from fpdf import FPDF
+from weasyprint import HTML
 
 
-path_to_wkhtmltopdf = r'wkhtmltopdf.exe'
+# path_to_wkhtmltopdf = r'wkhtmltopdf.exe'
 
-config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+# config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
 
 header = """
 <!DOCTYPE html>
@@ -503,5 +504,6 @@ def generate_pdf_file(html_sections):
     }
 
     # ✅ Pass options to pdfkit
-    pdfkit.from_string(html_content, pdf_file_path, configuration=config, options=options)
+    # pdfkit.from_string(html_content, pdf_file_path, configuration=config, options=options)
+    HTML(string=html_content).write_pdf(pdf_file_path)
     return pdf_file_path
